@@ -8,7 +8,10 @@ def profile_page():
     return render_template("index.html")
 
 
-@posts_blueprint.route("/post_list/?s=<word>")
-def search_post(word):
-    word = request.args.get('s')
-    return render_template("post_list.html",word=word)
+@posts_blueprint.route("/post_list/")
+def search_post():
+
+    s = request.args.get('s')
+    data = search_in_post(s)
+    return render_template("post_list.html", s=s, data=data)
+

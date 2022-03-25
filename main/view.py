@@ -12,6 +12,6 @@ def profile_page():
 def search_post():
 
     s = request.args.get('s')
-    data = search_in_post(s)
-    return render_template("post_list.html", s=s, data=data)
+    posts = search_in_post(s)
+    return render_template("post_list.html", s=s, posts=posts)
 

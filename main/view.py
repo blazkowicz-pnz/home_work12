@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template, request
-from functions import read_from_json, search_in_post
+from main.utils import search_in_post
+import logging
 
-posts_blueprint = Blueprint('posts_blueprint', __name__)
+logging.basicConfig(encoding="utf-8", level=logging.INFO)
+
+posts_blueprint = Blueprint('posts_blueprint', __name__, static_folder="static", template_folder="templates")
 
 @posts_blueprint.route("/")
 def profile_page():
@@ -12,6 +15,10 @@ def profile_page():
 def search_post():
 
     s = request.args.get('s')
+    logging.info(f"Слово для поиска: {s}")
     posts = search_in_post(s)
     return render_template("post_list.html", s=s, posts=posts)
+
+
+
 
